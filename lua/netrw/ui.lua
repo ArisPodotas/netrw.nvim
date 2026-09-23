@@ -65,7 +65,7 @@ M.embelish = function(bufnr)
 			if hl_group then
 				opts.sign_hl_group = hl_group
 			end
-			opts.sign_text = icon
+			opts.sign_text = icon.symbol
 			vim.api.nvim_buf_set_extmark(bufnr, namespace, i - 1, 0, opts)
 		else
 			if hl_group then

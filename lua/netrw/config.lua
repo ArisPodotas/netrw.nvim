@@ -3,9 +3,9 @@ local M = {}
 ---@class Config
 local defaults = {
 	icons = {
-		symlink = "",
-		directory = "",
-		file = "",
+        symlink = {symbol = '󰟀', opts = nil},
+        directory = {symbol = '󰉋', opts = nil},
+        file = {symbol = '󰈤', opts = nil},
 	},
 	use_devicons = true,
 	mappings = {},

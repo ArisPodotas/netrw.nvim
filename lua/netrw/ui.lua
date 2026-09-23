@@ -7,7 +7,8 @@ local get_icon = function(node)
 	local icon = ""
 	local hl_group = ""
 	if node.type == parse.TYPE_FILE then
-		icon = config.options.icons.file
+		icon = config.options.icons.file.symbol
+        hl_group = config.options.icons.file.opts
 		if config.options.use_devicons then
 			local has_devicons, devicons = pcall(require, "nvim-web-devicons")
 			if has_devicons then
@@ -19,7 +20,8 @@ local get_icon = function(node)
 			end
 		end
 	elseif node.type == parse.TYPE_DIR then
-		icon = config.options.icons.directory
+		icon = config.options.icons.directory.symbol
+        hl_group = config.options.icons.directory.opts
 		if config.options.use_devicons then
 			local has_devicons, devicons = pcall(require, "nvim-web-devicons")
 			if has_devicons then
@@ -31,7 +33,8 @@ local get_icon = function(node)
 			end
 		end
 	elseif node.type == parse.TYPE_SYMLINK then
-		icon = config.options.icons.symlink
+		icon = config.options.icons.symlink.symbol
+        hl_group = config.options.icons.symlink.opts
 		if config.options.use_devicons then
 			local has_devicons, devicons = pcall(require, "nvim-web-devicons")
 			if has_devicons then

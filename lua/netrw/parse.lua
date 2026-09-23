@@ -143,15 +143,12 @@ M.get_node = function(line)
 	if string.find(line, '^"') then
 		return nil
 	end
-
 	-- When netrw is empty, there's one line in the buffer and it is empty.
 	if line == "" then
 		return nil
 	end
-
 	local curdir = vim.b.netrw_curdir
 	local liststyle = vim.b.netrw_liststyle
-
 	if liststyle == 0 then
 		return parse_liststyle_0(line, curdir)
 	elseif liststyle == 1 then
@@ -159,7 +156,6 @@ M.get_node = function(line)
 	elseif liststyle == 3 then
 		return parse_liststyle_3(line, curdir)
 	end
-
 	return {}
 end
 

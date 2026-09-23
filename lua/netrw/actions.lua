@@ -10,7 +10,6 @@ M.dispatch = function(key)
 	local row, _ = unpack(vim.api.nvim_win_get_cursor(winid))
 	local line = vim.api.nvim_buf_get_lines(bufnr, row - 1, row, false)
 	local payload = parse.get_node(line[1])
-
 	-- Remove escape chars from the key so it matches the actual mapping
 	local unescaped_key = key:gsub("%%", "")
 	config.options.mappings[unescaped_key](payload)

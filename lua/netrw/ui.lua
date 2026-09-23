@@ -6,7 +6,6 @@ local parse = require("netrw.parse")
 local get_icon = function(node)
 	local icon = ""
 	local hl_group = ""
-
 	if node.type == parse.TYPE_FILE then
 		icon = config.options.icons.file
 		if config.options.use_devicons then
@@ -21,17 +20,35 @@ local get_icon = function(node)
 		end
 	elseif node.type == parse.TYPE_DIR then
 		icon = config.options.icons.directory
+		if config.options.use_devicons then
+			local has_devicons, devicons = pcall(require, "nvim-web-devicons")
+			if has_devicons then
+				local ic, hi = devicons.get_icon(node.node, nil, { strict = true, default = false })
+				if ic then
+					icon = ic
+					hl_group = hi
+				end
+			end
+		end
 	elseif node.type == parse.TYPE_SYMLINK then
 		icon = config.options.icons.symlink
+		if config.options.use_devicons then
+			local has_devicons, devicons = pcall(require, "nvim-web-devicons")
+			if has_devicons then
+				local ic, hi = devicons.get_icon(node.node, nil, { strict = true, default = false })
+				if ic then
+					icon = ic
+					hl_group = hi
+				end
+			end
+		end
 	end
-
 	return { icon, hl_group }
 end
 
 ---@param bufnr number
 M.embelish = function(bufnr)
 	local namespace = vim.api.nvim_create_namespace("netrw")
-
 	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 	for i, line in ipairs(lines) do
 		local node = parse.get_node(line)
@@ -58,7 +75,6 @@ M.embelish = function(bufnr)
 		end
 		::continue::
 	end
-
 	-- Fixes weird case where the cursor spawns inside of the sign column.
 	vim.cmd([[norm lh]])
 end
